@@ -1,0 +1,77 @@
+.edit-food {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  .edit-food h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 24px;
+  }
+  
+  .edit-food form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .edit-food form div {
+    margin-bottom: 15px;
+  }
+  
+  .edit-food label {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  .edit-food input[type="text"],
+  .edit-food input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+    transition: border 0.3s ease;
+  }
+  
+  .edit-food input[type="text"]:focus,
+  .edit-food input[type="number"]:focus {
+    border-color: #4caf50;
+  }
+  
+  .edit-food button[type="submit"] {
+    padding: 10px;
+    background-color: #4caf50;
+    color: #fff;
+    font-size: 18px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .edit-food button[type="submit"]:hover {
+    background-color: #45a049;
+  }
+  
+  @media (max-width: 768px) {
+    .edit-food {
+      padding: 15px;
+    }
+  
+    .edit-food h2 {
+      font-size: 20px;
+    }
+  
+    .edit-food button[type="submit"] {
+      font-size: 16px;
+    }
+  }
+  
