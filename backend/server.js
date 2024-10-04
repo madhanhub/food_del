@@ -15,6 +15,7 @@ const port = 4000
 
 // middleware
 app.use(express.json())
+app.use('/food',foodRouter)
 app.use(cors())
 
 // db connection

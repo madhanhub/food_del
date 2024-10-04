@@ -54,7 +54,8 @@ const removeFood = async (req,res) => {
 
 const editFood=async (req,res)=>{
     try{
-        const food=await foodModel.findOneAndUpdate({id:req.body.id},
+        
+        const food=await foodModel.findOneAndUpdate({_id:req.body.id},
             {
                 name:req.body.name,
                 description:req.body.description,
