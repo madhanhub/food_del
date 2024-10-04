@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbar from './components/Navbar/Navbar'
 import Sidebar from './components/Sidebar/Sidebar'
-import Edit from './components/Edit'
+
 import { Routes,Route } from 'react-router-dom'
 import Add from './pages/Add/Add'
 import List from './pages/List/List'
@@ -25,7 +25,7 @@ const App = () => {
           <Route path="/list" element={<List url={url}/>}/>
           <Route path="/orders" element={<Orders url={url}/>}/>
         </Routes>
-        <Edit/>
+        
       </div>
     </div>
   )
