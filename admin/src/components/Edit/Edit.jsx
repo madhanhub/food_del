@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import './EditFood.css';  // Import the CSS here
 
 const EditFood = ({ url }) => {
-  const { id } = useParams(); // Get food item ID from the URL
+  const { id } = useParams();
   const navigate = useNavigate();
-
   const [foodData, setFoodData] = useState({
     name: '',
     description: '',
@@ -14,11 +14,10 @@ const EditFood = ({ url }) => {
     category: ''
   });
 
-  // Fetch food item data to pre-fill the form
   useEffect(() => {
     const fetchFood = async () => {
       try {
-        const response = await axios.get(`${url}/food/${id}`); // Get existing food data by ID
+        const response = await axios.get(`${url}/food/${id}`);
         setFoodData(response.data);
       } catch (error) {
         console.error("Error fetching food data:", error);
@@ -27,26 +26,24 @@ const EditFood = ({ url }) => {
     fetchFood();
   }, [id, url]);
 
-  // Handle form input changes
   const handleChange = (e) => {
     setFoodData({ ...foodData, [e.target.name]: e.target.value });
   };
 
-  // Handle form submission for editing the food item
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.patch(`${url}/food/edit`, {
-        id,  // Send the food ID along with the updated fields
+        id,
         name: foodData.name,
         description: foodData.description,
         price: foodData.price,
         category: foodData.category
       });
-      
+
       if (response.data.success) {
         toast.success('Food item updated successfully!');
-        navigate('/list'); // Redirect to the list page after successful update
+        navigate('/list');
       } else {
         toast.error('Error updating food item.');
       }
