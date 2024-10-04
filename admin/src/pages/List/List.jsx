@@ -1,64 +1,55 @@
-import React, { useEffect, useState } from 'react'
-import './List.css'
-import axios from "axios"
-import {toast} from "react-toastify"
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
-const List = ({url}) => {
+const List = ({ url }) => {
+  const [foodItems, setFoodItems] = useState([]);
 
-  const [list,setList] = useState([]);
-
-  const fetchList = async () => {
-    const response = await axios.get(`${url}/api/food/list`);
-    if (response.data.success){
-      setList(response.data.data)
-    }
-    else
-    {
-      toast.error("Error")
-    }
-  }
-
-  const removeFood = async(foodId) => {
-    const response = await axios.post(`${url}/api/food/remove`,{id:foodId});
-    await fetchList();
-    if (response.data.success){
-      toast.success(response.data.message)
-    }
-    else{
-      toast.error("Error")
-    }
-  }
-
-
-  useEffect(()=>{
-    fetchList();
-  },[])
+  // Fetch all food items
+  useEffect(() => {
+    const fetchFoodItems = async () => {
+      try {
+        const response = await axios.get(`${url}/food`); // Assuming you have a GET route for fetching food items
+        setFoodItems(response.data);
+      } catch (error) {
+        console.error('Error fetching food items:', error);
+      }
+    };
+    fetchFoodItems();
+  }, [url]);
 
   return (
-    <div className='list add flex-col'>
-      <p>All Foods List</p>
-    <div className="list-table">
-      <div className="list-table-format title">
-        <b>Image</b>
-        <b>Name</b>
-        <b>Category</b>
-        <b>Price</b>
-        <b>Action</b>
-      </div>
-      {list.map((item,index)=>{
-        return (
-          <div key={index} className='list-table-format'>
-            <img src={`${url}/images/`+item.image} alt="" />
-            <p>{item.name}</p>
-            <p>{item.category}</p>
-            <p>${item.price}</p>
-            <p onClick={()=>removeFood(item._id)} className='cursor'>X</p>
-          </div>
-        )
-      })}
+    <div className="food-list">
+      <h2>Food Items</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {foodItems.map((food) => (
+            <tr key={food._id}>
+              <td>{food.name}</td>
+              <td>{food.description}</td>
+              <td>{food.price}</td>
+              <td>{food.category}</td>
+              <td>
+                {/* Add an edit button that links to the edit form */}
+                <Link to={`/edit/${food._id}`}>
+                  <button>Edit</button>
+                </Link>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
-    </div>
-  )
-}
+  );
+};
 
-export default List
+export default List;
