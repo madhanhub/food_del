@@ -4,7 +4,7 @@ import { assets } from "../../assets/assets";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const Edit = ({ url }) => {
+const Edit = ({ url,foodId }) => {
   const [image, setImage] = useState(false);
   const [data, setData] = useState({
     name: "",
@@ -27,7 +27,10 @@ const Edit = ({ url }) => {
     formData.append("price", Number(data.price));
     formData.append("category", data.category);
     formData.append("image", image);
-    const response = await axios.post(`${url}/api/food/add`, formData);
+    const response = await axios.post(`${url}/update`, formData,formData, {
+      headers: {
+        "Content-Type": "multipart/form-data", // Ensure multipart form-data is used
+      },});
     if (response.data.success) {
       setData({
         name: "",
@@ -151,7 +154,7 @@ const Edit = ({ url }) => {
           </div>
         </div>
         <button type="submit" className="add-btn">
-          ADD
+          update
         </button>
       </form>
     </div>
