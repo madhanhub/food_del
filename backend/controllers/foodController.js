@@ -54,8 +54,9 @@ const removeFood = async (req,res) => {
 
 const editFood=async (req,res)=>{
     try{
-        
-        const food=await foodModel.findOneAndUpdate({_id:req.body.id},
+        console.log("Request Body ID:", req.body);
+
+        const updated_food=await foodModel.findOneAndUpdate({id:req.body._id},
             {
                 name:req.body.name,
                 description:req.body.description,
@@ -63,11 +64,13 @@ const editFood=async (req,res)=>{
                 category:req.body.category,
                
             },{new:true})
-            res.json({success:true,message:'success',data:food})
+            console.log(updated_food);
+            res.json({success:true,message:'success',data:updated_food})
     }catch(error){
         console.log(error);
         res.json({success:false,message:'Error'})
     }
 }
+
 
 export {addFood,listFood,removeFood,editFood}
