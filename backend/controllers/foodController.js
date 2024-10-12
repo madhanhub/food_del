@@ -13,7 +13,9 @@ const addFood = async (req,res) => {
         description:req.body.description,
         price:req.body.price,
         category:req.body.category,
-        image:image_filename
+        image:image_filename,
+        outofstock:req.body.outofstock,
+        offerpercentage:req.body.offerpercentage
     })
     try {
         await food.save();
@@ -67,7 +69,7 @@ const updateFood = async (req, res) => {
       food.description = description;
       food.price = price;
       food.category = category;
-      food.image = image_filename;
+      food.image_filename = image_filename;
   
       await food.save();
       res.json({ success: true, message: "Food Updated" });

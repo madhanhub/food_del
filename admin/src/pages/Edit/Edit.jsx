@@ -27,7 +27,7 @@ const Edit = ({ url,foodId }) => {
     formData.append("price", Number(data.price));
     formData.append("category", data.category);
     formData.append("image", image);
-    const response = await axios.post(`${url}/update`, formData,formData, {
+    const response = await axios.post(`${url}/api/food/update`, formData,formData, {
       headers: {
         "Content-Type": "multipart/form-data", // Ensure multipart form-data is used
       },});
